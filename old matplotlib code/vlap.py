@@ -45,7 +45,6 @@ def graph_projectile(As, m, Cd, theta0, g = 9.81):
     ## THE FUN PART FUN PART
     aaaaaa = False
 
-
     ##Will use iteration because well I dont know any other way to do so
     for t0 in t:
 
