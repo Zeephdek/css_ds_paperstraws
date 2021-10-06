@@ -1,0 +1,56 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [1.34853, 103.84149]
+        },
+        "properties": {
+          "name": "District 20 / Bosch"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [1.35202, 103.83702]
+        },
+        "properties": {
+          "name": "Shunfu Mart"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [1.35319, 103.83481]
+        },
+        "properties": {
+          "name": "That Hawker Centre"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [1.35346, 103.83455]
+        },
+        "properties": {
+          "name": "7-Eleven (Sin Ming Road)"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [1.35470, 103.83102]
+        },
+        "properties": {
+          "name": "Thomson Plaza"
+        }
+      }
+    ]
+}
+
