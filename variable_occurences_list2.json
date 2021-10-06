@@ -1,0 +1,26 @@
+{
+    "drinkType": {
+        "[BOTTLE] Coca-cola/Pepsi Original": 15,
+        "[BOTTLE] Fanta Grape/Orange": 2,
+        "[BOTTLE] Sprite Original": 4,
+        "[CAN] Coca-cola/Pepsi Original": 20,
+        "[CAN] Fanta Grape/Orange": 8,
+        "[CAN] Sprite Original": 11,
+        "[HOME-MADE] Bandung": 6,
+        "[HOME-MADE] Lime Juice": 9,
+        "[HOME-MADE] Milo Original": 13
+    },
+    "establishmentType": {
+        "Coffee shop": 23,
+        "Convenience stall": 18,
+        "Hawker": 10,
+        "Hawker Centre": 4,
+        "Mall": 11,
+        "Minimart": 4,
+        "Store": 2,
+        "Supermarket": 10,
+        "Vending": 4,
+        "Vending Machine": 1,
+        "Vending machine": 1
+    }
+}
