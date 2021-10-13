@@ -13,6 +13,9 @@ MRTStations = {
     "Bishan": (1.351111, 103.848333)
 }
 
+def calculateDistance(coord1, coord2): # in km
+    return np.sqrt((coord1[0] - coord2[0]) ** 2 + (coord1[1] - coord2[1]) ** 2) * 111
+
 def main1():
     list1 = pd.read_csv("list part 1 missing values.csv")
     print(list1.head(8))
@@ -94,7 +97,28 @@ def dealingWithCatVars():
         print(varsToIgnore, varsToCare)
 
 def distToMrt(df):
-    return ()
+    df["distance to AMK"] = df.apply(lambda x: calculateDistance(
+        (x["lat"], x["long"]),
+        MRTStations["Ang Mo Kio"]
+    ), axis = 1)
+
+    df["distance to Bishan"] = df.apply(lambda x: calculateDistance(
+        (x["lat"], x["long"]),
+        MRTStations["Bishan"]
+    ), axis = 1)
+
+    df["distance to Marymount"] = df.apply(lambda x: calculateDistance(
+        (x["lat"], x["long"]),
+        MRTStations["Marymount"]
+    ), axis = 1)
+
+    df["shortest distance"] = df.apply(lambda x: min([
+        x["distance to AMK"],
+        x["distance to Bishan"],
+        x["distance to Marymount"]
+    ]), axis = 1)
+
+    return df
 
 def catVar(df):
 
@@ -215,6 +239,9 @@ def main2():
     ## Dealing with the categorical variables
     list2 = catVar(list2)
 
+    ## distances and shit
+    list2 = distToMrt(list2)
+
     # viewDf()
 
     ## output to new csv
@@ -229,6 +256,7 @@ def plots(df):
     fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2)
     ax1 = testPlotLocations(df, ax1)
     ax2 = plotEstType(df, ax2)
+    ax3 = plotDistToMrts(df, ax3)
 
     plt.show()
 
@@ -280,17 +308,34 @@ def testPlotLocations(df, ax):
     """
     Might be useful to overlay a map as the bg image
     """
+    s = 5
+
     x, y = np.array(df['long']), np.array(df['lat'])
     NSLy, NSLx = [MRTStations["Bishan"][0], MRTStations["Ang Mo Kio"][0]], [MRTStations["Bishan"][1], MRTStations["Ang Mo Kio"][1]]
     CCLy, CCLx = [MRTStations["Marymount"][0]], [MRTStations["Marymount"][1]]
-    ax.set_title("Coordinates")
-    ax.scatter(x, y)
-    ax.scatter(CCLx, CCLy, color = "yellow")
-    ax.scatter(NSLx, NSLy, color = "red")
+    ax.set_title("Locations")
+    ax.imshow(plt.imread("map.png"), extent=[103.8293, 103.85097, 1.3446, 1.37439], alpha=0.7)
+    ax.scatter(x, y, s=s, color="black")
+    ax.set_aspect('equal')
+    ax.scatter(CCLx, CCLy, color = "yellow", s=s)
+    ax.scatter(NSLx, NSLy, color = "red", s=s)
+    ax.grid(linewidth='0.3')
 
     return ax
 
 def plotDistToMrts(df, ax):
+
+    prices = df['price']
+    dist = df["shortest distance"]
+
+    ax.set_title("Prices based on the Shortest Distance to an MRT Station") 
+    ax.set_xlabel("Shortest Distance to an MRT Station/km") 
+    ax.set_ylabel("Price/$") 
+    ax.set_xticks(np.arange(0, max(dist) + 1, 0.2))
+    ax.set_yticks(np.arange(0, max(prices) + 1, 0.5))
+    ax.grid(linewidth='0.3')
+    ax.scatter(dist, prices, s=8, alpha=.75) 
+
     return ax
 
 if __name__ == "__main__":
