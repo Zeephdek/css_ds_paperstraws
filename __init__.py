@@ -122,7 +122,7 @@ def distToMrt(df):
 
 def catVar(df):
 
-    ## dealing with the rogue variables first
+    ## dealing with the repeated variables first
     # for EstType
     df.loc[df['establishmentType'] == "Hawker", 'establishmentType'] = "Hawker Centre"
     df.loc[df['establishmentType'].isin(["Vending machine", "Vending"]), 'establishmentType'] = "Vending Machine"
